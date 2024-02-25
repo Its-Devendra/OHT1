@@ -7,11 +7,8 @@ const VirtualCookingSession = () => {
   const { sessionId } = useParams();
 
   useEffect(() => {
-    // Simulate fetching session details from backend using sessionId
     const fetchSessionData = async () => {
       try {
-        // Simulating API call to fetch session details
-        // Assuming session details include status
         const sessionData = await getSessionData(sessionId);
         setSessionStatus(sessionData.status);
       } catch (error) {
@@ -23,28 +20,35 @@ const VirtualCookingSession = () => {
   }, [sessionId]);
 
   const getSessionData = async (sessionId) => {
-    // Simulating API call to fetch session details
-    // Replace this with actual API call
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve({
-          status: 'active', // Example session status
-          // Other session details...
-        });
-      }, 1000); // Simulating delay
-    });
+    try {
+      const response = await fetch(`YOUR_API_ENDPOINT/session/${sessionId}`);
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      throw new Error('Error fetching session data:', error);
+    }
   };
 
   const joinSession = async () => {
-    // Simulate joining the session
-    // Replace this with actual join session logic
-    setSessionStatus('active');
+    try {
+      await fetch(`YOUR_API_ENDPOINT/session/${sessionId}/join`, {
+        method: 'POST',
+      });
+      setSessionStatus('active');
+    } catch (error) {
+      console.error('Error joining session:', error);
+    }
   };
 
   const leaveSession = async () => {
-    // Simulate leaving the session
-    // Replace this with actual leave session logic
-    setSessionStatus('completed');
+    try {
+      await fetch(`YOUR_API_ENDPOINT/session/${sessionId}/leave`, {
+        method: 'POST',
+      });
+      setSessionStatus('completed');
+    } catch (error) {
+      console.error('Error leaving session:', error);
+    }
   };
 
   return (

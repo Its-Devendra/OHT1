@@ -15,12 +15,6 @@ const Navbar = () => {
     setAnchorEl(null);
   };
 
-  const handleLogin = () => {
-    // Add login functionality here
-    alert('Login clicked');
-    handleClose();
-  };
-
   return (
     <div>
       <AppBar position="static">
@@ -45,12 +39,13 @@ const Navbar = () => {
           >
             <MenuItem onClick={handleClose} component={Link} to="/">Home</MenuItem>
             <MenuItem onClick={handleClose} component={Link} to="/culinary-experiences">Culinary Experiences</MenuItem>
-            {/* Add more menu items here */}
+            <MenuItem onClick={handleClose} component={Link} to="/about">About</MenuItem>
+            <MenuItem onClick={handleClose} component={Link} to="/sharing-recipes-tips">Sharing Recipes and Tips</MenuItem>
           </Menu>
           <Typography variant="h6" style={{ flexGrow: 1 }}>
             Culinary Platform
           </Typography>
-          <Button color="inherit" onClick={handleLogin}>Login</Button>
+          <Button color="inherit" component={Link} to="/login">Login</Button>
         </Toolbar>
       </AppBar>
     </div>
